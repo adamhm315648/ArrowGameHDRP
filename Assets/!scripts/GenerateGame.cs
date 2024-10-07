@@ -65,6 +65,10 @@ public class GenerateGame : MonoBehaviour
     {
         //int rand = UnityEngine.Random.Range(1, 2) * 2;
         //Debug.Log(rand);
+        if (difficulty >= 12)
+        {
+            difficulty = 12;
+        }
         for (int i = 0; i < difficulty; i++)
         {
             GameObject numberObject = Instantiate(numberPrefab, placeToSpawn);
@@ -108,6 +112,7 @@ public class GenerateGame : MonoBehaviour
                 }
             }
             numbers[i].GetComponent<Number>().text.text = numbers[i].GetComponent<Number>().correctValue.ToString();
+            arrows[i].GetComponent<Arrow>().correctArrow = arrows[i].GetComponent<Image>().sprite;
             CalculateNumberValues();
         }
         Debug.Log("Calculated");
@@ -168,7 +173,15 @@ public class GenerateGame : MonoBehaviour
             // Play the audio when the puzzle is solved
             if (!isGenerating)
             {
-                difficulty += 1;
+                if (difficulty >= 12)
+                {
+                    difficulty = 12;
+                }
+                else
+                {
+                    difficulty += 1;
+                }
+                Debug.Log("Difficulty increased to " + difficulty);
                 solvedSound.Play();
                 nextLevelButton.SetActive(true);
             }
@@ -205,5 +218,15 @@ public class GenerateGame : MonoBehaviour
         }
 
         return isSolved; // Return true if solved, false otherwise
+    }
+
+    public void SolveAll()
+    {
+        Debug.Log("Solving all numbers...");
+        for (int i = 0; i < arrows.Count; i++)
+        {
+            arrows[i].GetComponent<Image>().sprite = arrows[i].GetComponent<Arrow>().correctArrow;
+        }
+        CalculateNumberValues();
     }
 }

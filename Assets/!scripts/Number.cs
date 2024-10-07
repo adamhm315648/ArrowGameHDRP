@@ -11,15 +11,17 @@ public class Number : MonoBehaviour
     public int correctValue;
     public TMP_Text text;
 
+    public GenerateGame generateGame;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        generateGame = FindObjectOfType<GenerateGame>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetCorrectNumber()
     {
-        
+        value = correctValue;
+        Debug.Log("Set correct number");        
     }
 }

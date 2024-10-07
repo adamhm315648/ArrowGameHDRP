@@ -7,6 +7,7 @@ public class Arrow : MonoBehaviour
 {
 
     public Sprite arrowLeft, arrowRight;
+    public Sprite correctArrow;
     public int index;
     public GenerateGame generateGame;
 
